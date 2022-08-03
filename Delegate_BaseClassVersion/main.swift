@@ -7,5 +7,15 @@
 
 import Foundation
 
-print("Hello, World!")
+class BaseClass{
+    func sendValue(){
+        
+    }
+}
+class MainClass{
+    
+}
 
+var base = BaseClass()
+var main = MainClass()
+base.sendValue()
