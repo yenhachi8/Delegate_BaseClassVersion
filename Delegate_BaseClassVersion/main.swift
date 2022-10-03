@@ -6,21 +6,36 @@
 //
 
 import Foundation
-//3
+///1 BaseClass
+///2 Protocol
+///3 delegate
+///4 delegate function
+///
+///5 MainClass
+///6 use Protocol
+///7 use function
+
+
+
+//2
 protocol BaseClassProtocol{
-    func link()
+    func link(message:String)
 }
 
 //1
 class BaseClass{
-    var delegate:BaseClassProtocol?//5
+    var delegate:BaseClassProtocol?//3
     func sendValue(){
         print("BaseClass sendValue()")
-        delegate?.link()//6
+        delegate?.link(message: "from baseClass")//4
     }
 }
-//2
-class MainClass:/* 4 */BaseClassProtocol{
+//5
+class MainClass:/* 6 */BaseClassProtocol{
+    func link(message: String) {
+        print("MainClass \(message)")
+    }
+    
     func link() {
         print("link MainClass")
     }
