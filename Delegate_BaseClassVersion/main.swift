@@ -21,17 +21,29 @@ import Foundation
 protocol BaseClassProtocol{
     func link(message:String)
 }
+protocol TransitionDelegate{
+    func animateController(present:String)
+}
 
 //1
 class BaseClass{
     var delegate:BaseClassProtocol?//3
+    var transitioningDelegate:TransitionDelegate?
     func sendValue(){
         print("BaseClass sendValue()")
         delegate?.link(message: "from baseClass")//4
     }
+    func presentVC(){
+        print("base present")
+        transitioningDelegate?.animateController(present: "from base presenting")
+    }
 }
 //5
-class MainClass:/* 6 */BaseClassProtocol{
+class MainClass:/* 6 */BaseClassProtocol, TransitionDelegate{
+    func animateController(present: String) {
+        print("Main \(present)")
+    }
+    
     func link(message: String) {
         print("MainClass \(message)")
     }
@@ -43,4 +55,7 @@ class MainClass:/* 6 */BaseClassProtocol{
 var base = BaseClass()
 var main = MainClass()
 base.delegate = main//7
-base.sendValue()
+//base.sendValue()
+
+base.transitioningDelegate = main
+base.presentVC()
